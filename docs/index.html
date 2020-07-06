@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Question Answering model | Rafał Bielech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Raspberry PI Surveillance System writeup">
+    <meta name="author" content="Rafał Bielech">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="./images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="./images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="./images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <link href="./static/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Nunito" />
+</head>
+
+<body data-gr-c-s-loaded="true">
+    <div class="container">
+        <div class="row" style="padding-top: 30px;">
+            <div class="col-lg-12">
+                <h2 class="text-muted text-center">Question Answering with context using Google's Universal Sentence
+                    Encoder</h2>
+            </div>
+            <hr class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="border-top: 2px solid lightgrey">
+        </div>
+        <div class="row offset10">
+            <div class="col-lg-8">
+                <object data="./other/1803.11175.pdf" type="application/pdf" width="100%" height="600px">
+                    <p>Pdf can be found here <a href="https://arxiv.org/abs/1803.11175"></a></p>
+                </object>
+            </div>
+            <div class="col-lg-4 text-muted">
+                <p> The transformer family of models have been a huge hit in the NLP domain for many reasons. These
+                    state-of-the-art variations of the transformer models have proven to be very successful for question
+                    answering, inference, sentiment analysis and more. While initially exploring this area, I was amazed
+                    by the performance and simplicity of use of the Universal Encoder for a recommendation system that I
+                    was building. Please see Google's colab notebook <a
+                        href="https://tfhub.dev/google/universal-sentence-encoder/4" target="_blank">here</a>.
+                </p>
+                <p>
+                    One particular application of this model that I have not see was using the universal encoder against
+                    a dataset of questions and answers to find similiar questions that can be used to provide answers
+                    with context. Hence, this is something I explored and shared my code in a <a
+                        href="https://github.com/rafalbielech/Question-Answer-using-Encoder" target="_blank">repository
+                        on Github</a>.
+                </p>
+
+            </div>
+        </div>
+
+        <div class="row offset" style="padding-top: 20px;">
+            <div class="col-lg-12">
+                <h4 class="text-center text-muted ">Components</h4>
+            </div>
+            <hr class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="border-top: 2px solid lightgrey;">
+        </div>
+        <div class="row text-muted">
+            <div class="col-6">
+                <p><a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank">Stanford Question Answering
+                        Dataset</a>
+                    is a great resource for a dataset across >400 topic areas with questions, answers, and context
+                    already
+                    prepared. This dataset is utilized in this project. In the notebook in my <a
+                        href="https://github.com/rafalbielech/Question-Answer-using-Encoder" target="_blank">repository
+                        on
+                        Github</a> only looks at first 15 topic areas, which is roughly over 2000 questions and answers.
+                    Then, all of these questions are then fed through the universal sentence encoder model to produce a
+                    vector representation of size (1 x 512). The vector representation enables complex text to be
+                    converted
+                    to a numeric representation that can be later used to cosine similarity, classification, clustering,
+                    and
+                    more...</p>
+
+                <p>
+                    Referencing the example in the original Google colab notebook, if two sentences are talking about
+                    the sun shining outside, then these two sentences will be much closer to each other in the vector
+                    space than a sentence talking about a rainy day and a sentence talking about a sunny day.
+                </p>
+            </div>
+            <div class="col-6">
+                <img src="./images/vector_similarity.png" class="img-rounded img-responsive"
+                    alt="vector similarity graphic">
+            </div>
+            <div class="col-6">
+                <p>
+                    From <a href="https://en.wikipedia.org/wiki/Cosine_similarity" target="_blank">Wikipedia</a>, Cosine
+                    similarity is a measure of similarity between two non-zero vectors of an
+                    inner product space. It is defined to equal the cosine of the angle between them, which is also the
+                    same as the inner product of the same vectors normalized to both have length 1. The cosine of 0° is
+                    1, and it is less than 1 for any angle in the interval (0, π] radians. It is thus a judgment of
+                    orientation and not magnitude: two vectors with the same orientation have a cosine similarity of 1,
+                    two vectors oriented at 90° relative to each other have a similarity of 0, and two vectors
+                    diametrically opposed have a similarity of -1, independent of their magnitude.
+                </p>
+                <p>Thus, the higher the similarity, the higher alikeness between two vectors.</p>
+            </div>
+            <div class="col-6">
+                <img src="./images/cosine_similarity.svg" class="img-rounded img-responsive"
+                    alt="cosine similarity equation">
+            </div>
+        </div>
+        <div class="row text-muted">
+            <div class="col-12">
+                <p>
+
+                </p>
+            </div>
+            <div class="col-lg-12">
+                <h6 class="text-center text-muted">Notebook preview</h6>
+            </div>
+            <hr class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="border-top: 2px solid lightgrey;">
+            <div class="col-12">
+                <iframe src="Google encoder notebook.html" width="100%" height="500" style="overflow-y: scroll;">
+                </iframe>
+            </div>
+
+        </div>
+        <div class="row offset" style="padding-top: 20px">
+            <div class="col-lg-12">
+                <h4 class="text-center text-muted">Performance</h4>
+            </div>
+            <hr class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="border-top: 2px solid lightgrey;">
+        </div>
+        <div class="row text-muted">
+            <div class="col-lg-12">
+                <p>
+                    Finding the closest 10 results to a question from a list of 2685 questions took 5.3 ms on average.
+                    This performance can be further optimized using specific vector database instead of in-memory
+                    mechanism. Overall, I think the performance was very impressive. Moreover, forward-feed through the
+                    network, despite not being timed, was also very fast.
+                </p>
+            </div>
+        </div>
+        <hr>
+    </div>
+</body>
+
+</html>

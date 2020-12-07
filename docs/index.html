@@ -2,157 +2,227 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="Rafał Bielech" />
     <title>Question Answering model | Rafał Bielech</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Raspberry PI Surveillance System writeup">
-    <meta name="author" content="Rafał Bielech">
-    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="./images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="./images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="./images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="./assets/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="./assets/img/favicon/favicon.ico">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="./images/favicon/browserconfig.xml">
+    <meta name="msapplication-config" content="./assets/img/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-    <link href="./static/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Nunito" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="js/fontawesome-all.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet"
+        type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+    <link href="css/styles.css" rel="stylesheet" />
 </head>
 
-<body data-gr-c-s-loaded="true">
-    <div class="container">
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <span class="d-block d-lg-none">Rafał Bielech</span>
+            <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+                    src="assets/img/me_icon.jpg" alt="" /></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#model">BERT model</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#components">Components</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#notebook">Jupyter Notebook</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <div class="row" style="padding-top: 30px;">
-            <div class="col-lg-12">
-                <h2 class="text-muted text-center">Question Answering with context using Google's Universal Sentence
-                    Encoder</h2>
+
+    <div class="container-fluid p-0">
+        <section class="information-section" id="about" style="align-items: center;">
+            <div class="information-section-content">
+                <h2 class="mb-0">
+                    Question Answering with context using Google's Universal Sentence Encoder
+
+                </h2>
+                <div class="subheading mb-2">
+                    Code is made available on <a target="_blank"
+                        href="https://github.com/rafalbielech/Question-Answer-using-Encoder">Github</a>
+                </div>
+
+                <div class="social-icons mt-2">
+                    <a class="social-icon" title="Project page" target="_blank"
+                        href="https://rafalbielech.github.io/projects/"><i class="fab fas fa-laptop-code"></i></a>
+                    <a class="social-icon" title="GitHub" target="_blank"
+                        href="https://github.com/rafalbielech/Question-Answer-using-Encoder"><i
+                            class="fab fa-github"></i></a>
+                </div>
+
+                <div class="text-muted mt-5 mb-2">The transformer family of models have been a huge hit in the NLP
+                    domain for many reasons. These state-of-the-art variations of the transformer models have proven to
+                    be very successful for question answering, inference, sentiment analysis and more. While initially
+                    exploring this area, I was amazed by the performance and simplicity of use of the Universal Encoder
+                    for a recommendation system that I was building.</div>
+
+                <div class="subheading text-primary mb-1">Programming Languages, Tools & Platforms</div>
+                <ul class="list-inline dev-icons">
+                    <li class="list-inline-item"><i class="fab fa-python"></i></li>
+
+                </ul>
+
             </div>
-            <div class="col-12">
-                <a href="https://rafalbielech.github.io/projects">
-                    <div class="text-primary"><span class="material-icons">
-                            arrow_back_ios
-                        </span><span class="material-icons">
-                            dashboard
-                        </span>
-                        <div class="my-auto">Go back to view other projects</div>
+        </section>
+        <hr class="m-0" />
+        <section class="information-section" id="model">
+            <div class="information-section-content">
+                <h2 class="mb-2">BERT model</h2>
+                <hr>
+                <div class="d-flex mb-5">
+                    <div class="row offset10">
+                        <div class="col-lg-8">
+                            <object data="assets/img/supplemental/1803.11175.pdf" type="application/pdf" width="100%"
+                                height="600px">
+                                <p>Pdf can be found here <a href="https://arxiv.org/abs/1803.11175"></a></p>
+                            </object>
+                        </div>
+                        <div class="col-lg-4 text-muted">
+                            <p> The transformer family of models have been a huge hit in the NLP domain for many
+                                reasons. These
+                                state-of-the-art variations of the transformer models have proven to be very successful
+                                for question
+                                answering, inference, sentiment analysis and more. While initially exploring this area,
+                                I was amazed
+                                by the performance and simplicity of use of the Universal Encoder for a recommendation
+                                system that I
+                                was building. Please see Google's colab notebook <a
+                                    href="https://tfhub.dev/google/universal-sentence-encoder/4"
+                                    target="_blank">here</a>.
+                            </p>
+                            <p>
+                                One particular application of this model that I have not see was using the universal
+                                encoder against
+                                a dataset of questions and answers to find similiar questions that can be used to
+                                provide answers
+                                with context. Hence, this is something I explored and shared my code in a <a
+                                    href="https://github.com/rafalbielech/Question-Answer-using-Encoder"
+                                    target="_blank">repository
+                                    on Github</a>.
+                            </p>
+
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
-            <hr class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="border-top: 2px solid lightgrey">
+        </section>
+        <hr class="m-0" />
+        <section class="information-section" id="components">
+            <div class="information-section-content">
+                <h2 class="mb-2">Components</h2>
+                <hr>
+                <div class="d-flex mb-5">
+                    <div class="row text-muted">
+                        <div class="col-6">
+                            <p><a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank">Stanford Question
+                                    Answering
+                                    Dataset</a>
+                                is a great resource for a dataset across >400 topic areas with questions, answers, and
+                                context
+                                already
+                                prepared. This dataset is utilized in this project. In the notebook in my <a
+                                    href="https://github.com/rafalbielech/Question-Answer-using-Encoder"
+                                    target="_blank">repository
+                                    on
+                                    Github</a> only looks at first 15 topic areas, which is roughly over 2000 questions
+                                and answers.
+                                Then, all of these questions are then fed through the universal sentence encoder model
+                                to produce a
+                                vector representation of size (1 x 512). The vector representation enables complex text
+                                to be
+                                converted
+                                to a numeric representation that can be later used to cosine similarity, classification,
+                                clustering,
+                                and
+                                more...</p>
 
-        </div>
-        <div class="row offset10">
-            <div class="col-lg-8">
-                <object data="./other/1803.11175.pdf" type="application/pdf" width="100%" height="600px">
-                    <p>Pdf can be found here <a href="https://arxiv.org/abs/1803.11175"></a></p>
-                </object>
+                            <p>
+                                Referencing the example in the original Google colab notebook, if two sentences are
+                                talking about
+                                the sun shining outside, then these two sentences will be much closer to each other in
+                                the vector
+                                space than a sentence talking about a rainy day and a sentence talking about a sunny
+                                day.
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <img src="assets/img/supplemental/vector_similarity.png" class="img-rounded img-responsive"
+                                alt="vector similarity graphic">
+                        </div>
+                        <div class="col-6">
+                            <p>
+                                From <a href="https://en.wikipedia.org/wiki/Cosine_similarity"
+                                    target="_blank">Wikipedia</a>, Cosine
+                                similarity is a measure of similarity between two non-zero vectors of an
+                                inner product space. It is defined to equal the cosine of the angle between them, which
+                                is also the
+                                same as the inner product of the same vectors normalized to both have length 1. The
+                                cosine of 0° is
+                                1, and it is less than 1 for any angle in the interval (0, π] radians. It is thus a
+                                judgment of
+                                orientation and not magnitude: two vectors with the same orientation have a cosine
+                                similarity of 1,
+                                two vectors oriented at 90° relative to each other have a similarity of 0, and two
+                                vectors
+                                diametrically opposed have a similarity of -1, independent of their magnitude.
+                            </p>
+                            <p>Thus, the higher the similarity, the higher alikeness between two vectors.</p>
+                        </div>
+                        <div class="col-6">
+                            <img src="assets/img/supplemental/cosine_similarity.svg" class="img-rounded img-responsive"
+                                alt="cosine similarity equation">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4 text-muted">
-                <p> The transformer family of models have been a huge hit in the NLP domain for many reasons. These
-                    state-of-the-art variations of the transformer models have proven to be very successful for question
-                    answering, inference, sentiment analysis and more. While initially exploring this area, I was amazed
-                    by the performance and simplicity of use of the Universal Encoder for a recommendation system that I
-                    was building. Please see Google's colab notebook <a
-                        href="https://tfhub.dev/google/universal-sentence-encoder/4" target="_blank">here</a>.
-                </p>
-                <p>
-                    One particular application of this model that I have not see was using the universal encoder against
-                    a dataset of questions and answers to find similiar questions that can be used to provide answers
-                    with context. Hence, this is something I explored and shared my code in a <a
-                        href="https://github.com/rafalbielech/Question-Answer-using-Encoder" target="_blank">repository
-                        on Github</a>.
-                </p>
-
+        </section>
+        <hr class="m-0" />
+        <section class="information-section" id="notebook">
+            <div class="information-section-content">
+                <h2 class="mb-2">Notebook</h2>
+                <hr>
+                <div class="d-flex mb-5">
+                    <div class="row text-muted">
+                        <div class="col-lg-12">
+                            <h4>Performance review</h4>
+                            <p>
+                                Finding the closest 10 results to a question from a list of 2685 questions took 5.3 ms
+                                on average.
+                                This performance can be further optimized using specific vector database instead of
+                                in-memory
+                                mechanism. Overall, I think the performance was very impressive. Moreover, forward-feed
+                                through the
+                                network, despite not being timed, was also very fast.
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <iframe src="Google encoder notebook.html" width="100%" height="900" style="overflow-y: scroll;">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="row offset" style="padding-top: 20px;">
-            <div class="col-lg-12">
-                <h4 class="text-center text-muted ">Components</h4>
-            </div>
-            <hr class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="border-top: 2px solid lightgrey;">
-        </div>
-        <div class="row text-muted">
-            <div class="col-6">
-                <p><a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank">Stanford Question Answering
-                        Dataset</a>
-                    is a great resource for a dataset across >400 topic areas with questions, answers, and context
-                    already
-                    prepared. This dataset is utilized in this project. In the notebook in my <a
-                        href="https://github.com/rafalbielech/Question-Answer-using-Encoder" target="_blank">repository
-                        on
-                        Github</a> only looks at first 15 topic areas, which is roughly over 2000 questions and answers.
-                    Then, all of these questions are then fed through the universal sentence encoder model to produce a
-                    vector representation of size (1 x 512). The vector representation enables complex text to be
-                    converted
-                    to a numeric representation that can be later used to cosine similarity, classification, clustering,
-                    and
-                    more...</p>
-
-                <p>
-                    Referencing the example in the original Google colab notebook, if two sentences are talking about
-                    the sun shining outside, then these two sentences will be much closer to each other in the vector
-                    space than a sentence talking about a rainy day and a sentence talking about a sunny day.
-                </p>
-            </div>
-            <div class="col-6">
-                <img src="./images/vector_similarity.png" class="img-rounded img-responsive"
-                    alt="vector similarity graphic">
-            </div>
-            <div class="col-6">
-                <p>
-                    From <a href="https://en.wikipedia.org/wiki/Cosine_similarity" target="_blank">Wikipedia</a>, Cosine
-                    similarity is a measure of similarity between two non-zero vectors of an
-                    inner product space. It is defined to equal the cosine of the angle between them, which is also the
-                    same as the inner product of the same vectors normalized to both have length 1. The cosine of 0° is
-                    1, and it is less than 1 for any angle in the interval (0, π] radians. It is thus a judgment of
-                    orientation and not magnitude: two vectors with the same orientation have a cosine similarity of 1,
-                    two vectors oriented at 90° relative to each other have a similarity of 0, and two vectors
-                    diametrically opposed have a similarity of -1, independent of their magnitude.
-                </p>
-                <p>Thus, the higher the similarity, the higher alikeness between two vectors.</p>
-            </div>
-            <div class="col-6">
-                <img src="./images/cosine_similarity.svg" class="img-rounded img-responsive"
-                    alt="cosine similarity equation">
-            </div>
-        </div>
-        <div class="row text-muted">
-            <div class="col-12">
-                <p>
-
-                </p>
-            </div>
-            <div class="col-lg-12">
-                <h6 class="text-center text-muted">Notebook preview</h6>
-            </div>
-            <hr class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="border-top: 2px solid lightgrey;">
-            <div class="col-12">
-                <iframe src="Google encoder notebook.html" width="100%" height="500" style="overflow-y: scroll;">
-                </iframe>
-            </div>
-
-        </div>
-        <div class="row offset" style="padding-top: 20px">
-            <div class="col-lg-12">
-                <h4 class="text-center text-muted">Performance</h4>
-            </div>
-            <hr class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="border-top: 2px solid lightgrey;">
-        </div>
-        <div class="row text-muted">
-            <div class="col-lg-12">
-                <p>
-                    Finding the closest 10 results to a question from a list of 2685 questions took 5.3 ms on average.
-                    This performance can be further optimized using specific vector database instead of in-memory
-                    mechanism. Overall, I think the performance was very impressive. Moreover, forward-feed through the
-                    network, despite not being timed, was also very fast.
-                </p>
-            </div>
-        </div>
-        <hr>
+        </section>
     </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>
